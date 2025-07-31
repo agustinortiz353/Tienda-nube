@@ -119,16 +119,22 @@ nav a:hover {
 }
 
 .quantity-controls button {
-  background-color: #7c9ca4; /* azul grisáceo */
+  background-color: #7c9ca4;
   color: white;
   border: none;
   border-radius: 50%;
   width: 32px;
   height: 32px;
   font-size: 18px;
+  font-weight: bold;
+  line-height: 32px;        /* Igual que la altura para centrar vertical */
+  text-align: center;       /* Centrar horizontal */
   cursor: pointer;
   transition: background-color 0.3s;
+  padding: 0;               /* Evitar padding extra que desplace */
+  user-select: none;        /* Para que no se seleccione el signo al hacer click */
 }
+
 
 .quantity-controls button:hover {
   background-color: #6b8e93; /* azul grisáceo más oscuro */
