@@ -112,33 +112,43 @@
     }
 
     function changeTempQuantity(name, change) {
-      if (!tempQuantities[name]) tempQuantities[name] = 0;
-      const newQty = tempQuantities[name] + change;
+  if (!tempQuantities[name]) tempQuantities[name] = 0;
 
-      if (newQty >= 0 && newQty <= (stockLimits[name] || 1000)) {
-        tempQuantities[name] = newQty;
-        const tempSpan = document.getElementById(`temp-${name}`);
-        if (tempSpan) tempSpan.textContent = newQty;
-      }
-    }
+  // Si stock es 0 no permito aumentar ni disminuir (queda en 0)
+  if (stockLimits[name] === 0) return;
 
-    function addToCart(name) {
-      const toAdd = tempQuantities[name] || 0;
-      if (toAdd === 0) return;
+  const newQty = tempQuantities[name] + change;
 
-      if (!cart[name]) cart[name] = 0;
-      const newQty = cart[name] + toAdd;
+  if (newQty >= 0 && newQty <= (stockLimits[name] || 1000)) {
+    tempQuantities[name] = newQty;
+    const tempSpan = document.getElementById(`temp-${name}`);
+    if (tempSpan) tempSpan.textContent = newQty;
+  }
+}
 
-      if (newQty <= (stockLimits[name] || 1000)) {
-        cart[name] = newQty;
-        tempQuantities[name] = 0;
-        const tempSpan = document.getElementById(`temp-${name}`);
-        if (tempSpan) tempSpan.textContent = 0;
-        renderCart();
-      } else {
-        alert(`Solo hay ${stockLimits[name]} unidades disponibles de ${name}.`);
-      }
-    }
+function addToCart(name) {
+  if (stockLimits[name] === 0) {
+    alert(`El producto "${name}" está agotado y no puede agregarse.`);
+    return;
+  }
+
+  const toAdd = tempQuantities[name] || 0;
+  if (toAdd === 0) return;
+
+  if (!cart[name]) cart[name] = 0;
+  const newQty = cart[name] + toAdd;
+
+  if (newQty <= (stockLimits[name] || 1000)) {
+    cart[name] = newQty;
+    tempQuantities[name] = 0;
+    const tempSpan = document.getElementById(`temp-${name}`);
+    if (tempSpan) tempSpan.textContent = 0;
+    renderCart();
+  } else {
+    alert(`Solo hay ${stockLimits[name]} unidades disponibles de ${name}.`);
+  }
+}
+
 
     function clearCart() {
       for (const key in cart) cart[key] = 0;
@@ -183,4 +193,3 @@
 
 </body>
 </html>
-  
