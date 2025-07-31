@@ -1,0 +1,207 @@
+/* Reset y estilo base */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Quicksand', sans-serif;
+}
+
+body {
+  background-color: #fcfbfb; /* blanco rosado muy claro */
+  color: #758282; /* gris azulado */
+  line-height: 1.6;
+}
+
+/* Header */
+header {
+  background-color: #dad8da; /* gris claro */
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 3px solid #7c9ca4; /* azul grisáceo */
+}
+
+header h1 {
+  font-size: 1.8rem;
+  color: #7b9999; /* gris azulado */
+}
+
+nav a {
+  margin-left: 1.5rem;
+  text-decoration: none;
+  color: #849a9c; /* gris azulado claro */
+  font-weight: 600;
+}
+
+nav a:hover {
+  color: #7c8f8c; /* gris azulado más oscuro */
+}
+
+/* Banner */
+.banner {
+  background-color: #d8e6e7; /* celeste muy pálido */
+  text-align: center;
+  padding: 3rem 2rem;
+}
+
+.banner h2 {
+  font-size: 2rem;
+  color: #7c8f8c; /* gris azulado medio */
+  margin-bottom: 1rem;
+}
+
+.banner p {
+  font-size: 1.2rem;
+  color: #90aaac; /* celeste grisáceo */
+}
+
+/* Productos */
+.products {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 2rem;
+  padding: 3rem 2rem;
+}
+
+.product-card {
+  background-color: #f4fafa; /* celeste muy suave */
+  border: 2px solid #b4cccc; /* celeste claro */
+  border-radius: 12px;
+  padding: 1rem;
+  box-shadow: 2px 2px 8px rgba(124, 143, 140, 0.3);
+  transition: transform 0.2s ease-in-out;
+}
+
+.product-card:hover {
+  transform: scale(1.02);
+}
+
+.product-card img {
+  width: 100%;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+.product-card h3 {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+  color: #7b9999; /* gris azulado */
+}
+
+.product-card p {
+  font-size: 1rem;
+  color: #849a9c; /* gris azulado claro */
+}
+
+.product-card button {
+  margin-top: 0.8rem;
+  padding: 0.5rem 1rem;
+  background-color: #7c9ca4; /* azul grisáceo */
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  color: #fcfbfb; /* blanco rosado */
+  transition: background 0.3s;
+}
+
+.product-card button:hover {
+  background-color: #6b8e93; /* azul grisáceo más oscuro */
+}
+
+/* Controles de cantidad */
+.quantity-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.quantity-controls button {
+  background-color: #7c9ca4; /* azul grisáceo */
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  font-size: 18px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.quantity-controls button:hover {
+  background-color: #6b8e93; /* azul grisáceo más oscuro */
+}
+
+.quantity-controls span {
+  font-weight: bold;
+  min-width: 20px;
+  text-align: center;
+  color: #758282; /* gris azulado */
+}
+
+/* Contenedor carrito */
+#cart {
+  background-color: #e4f0f1; /* celeste muy claro */
+  padding: 1rem 1.5rem;
+  border-radius: 10px;
+  box-shadow: inset 0 0 8px #94b4bc; /* celeste grisáceo */
+  color: #758282; /* gris azulado */
+  min-height: 80px;
+}
+
+/* Botones de acción del carrito */
+.cart-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 20px;
+  justify-content: center;
+}
+
+.cart-actions button {
+  padding: 12px 22px;
+  font-weight: 700;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.25s ease, transform 0.15s ease;
+  box-shadow: 0 4px 8px rgba(124, 143, 140, 0.3);
+  color: #fcfbfb; /* blanco rosado */
+}
+
+/* Botón limpiar carrito */
+.cart-actions button:first-child {
+  background-color: #d35151; /* rosa grisáceo claro */
+  color: #ffffff; /* gris azulado medio */
+  box-shadow: 0 4px 10px #b4cccc88;
+}
+
+.cart-actions button:first-child:hover {
+  background-color: #a13e3e; /* rosa grisáceo un poco más oscuro */
+  color: #ffffff; /* gris azulado */
+  transform: scale(1.05);
+}
+
+/* Botón enviar por WhatsApp */
+.cart-actions button:last-child {
+  background-color: #73d380; /* azul grisáceo */
+  color: #fcfbfb; /* blanco rosado */
+  box-shadow: 0 4px 10px #94b4bc88;
+}
+
+.cart-actions button:last-child:hover {
+  background-color: #51925a; /* azul grisáceo más oscuro */
+  transform: scale(1.05);
+}
+
+/* Botón enviar deshabilitado */
+.cart-actions button:last-child:disabled {
+  background-color: #c7d7d7; /* gris celeste claro */
+  color: #849a9c; /* gris azulado claro */
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
+}
+

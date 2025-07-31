@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mi Tienda Infantil</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <header>
+    <h1>Tienda Infantil</h1>
+  </header>
+
+  <section class="banner">
+    <h2>Bienvenidos a nuestra tienda</h2>
+    <p>Productos adorables y seguros para los más chiquitos</p>
+  </section>
+
+  <section class="products" id="productos">
+    <div class="product-card">
+    <img src="/assets/juguete.png" alt="Babero Dino">
+    <h3>Babero Dino</h3>
+    <p>$2.500</p>
+    <div class="quantity-controls">
+      <button onclick="changeTempQuantity('Babero Dino', -1)">−</button>
+      <span id="temp-Babero Dino">0</span>
+      <button onclick="changeTempQuantity('Babero Dino', 1)">+</button>
+    </div>
+    <button onclick="addToCart('Babero Dino')">Agregar al carrito</button>
+    <p class="stock-info">Stock disponible: <span id="stock-Babero Dino">5</span></p>
+  </div>
+
+<div class="product-card">
+    <img src="/assets/juguete.png" alt="Body Estrellas">
+    <h3>Body Estrellas</h3>
+    <p>$3.800</p>
+    <div class="quantity-controls">
+      <button onclick="changeTempQuantity('Body Estrellas', -1)">−</button>
+      <span id="temp-Body Estrellas">0</span>
+      <button onclick="changeTempQuantity('Body Estrellas', 1)">+</button>
+    </div>
+    <button onclick="addToCart('Body Estrellas')">Agregar al carrito</button>
+    <p class="stock-info">Stock disponible: <span id="stock-Body Estrellas">5</span></p>
+  </div>
+
+  <div class="product-card">
+    <img src="/assets/juguete.png" alt="Sonajero Arcoiris">
+    <h3>Sonajero Arcoiris</h3>
+    <p>$1.900</p>
+    <div class="quantity-controls">
+      <button onclick="changeTempQuantity('Sonajero Arcoiris', -1)">−</button>
+      <span id="temp-Sonajero Arcoiris">0</span>
+      <button onclick="changeTempQuantity('Sonajero Arcoiris', 1)">+</button>
+    </div>
+    <button onclick="addToCart('Sonajero Arcoiris')">Agregar al carrito</button>
+    <p class="stock-info">Stock disponible: <span id="stock-Sonajero Arcoiris">5</span></p>
+  </div>
+
+  <div class="product-card">
+    <img src="/assets/juguete.png" alt="Babero Dino">
+    <h3>Producto A</h3>
+    <p>$2.500</p>
+    <div class="quantity-controls">
+      <button onclick="changeTempQuantity('Producto A', -1)">−</button>
+      <span id="temp-Producto A">0</span>
+      <button onclick="changeTempQuantity('Producto A', 1)">+</button>
+    </div>
+    <button onclick="addToCart('Producto A')">Agregar al carrito</button>
+    <p class="stock-info">Stock disponible: <span id="stock-Producto A">5</span></p>
+  </div>
+
+  <div class="product-card">
+    <img src="/assets/juguete.png" alt="Body Estrellas">
+    <h3>Producto B</h3>
+    <p>$3.800</p>
+    <div class="quantity-controls">
+      <button onclick="changeTempQuantity('Producto B', -1)">−</button>
+      <span id="temp-Producto B">0</span>
+      <button onclick="changeTempQuantity('Producto B', 1)">+</button>
+    </div>
+    <button onclick="addToCart('Producto B')">Agregar al carrito</button>
+    <p class="stock-info">Stock disponible: <span id="stock-Producto B">5</span></p>
+  </div>
+
+  <div class="product-card">
+    <img src="/assets/juguete.png" alt="Sonajero Arcoiris">
+    <h3>Producto C</h3>
+    <p>$1.900</p>
+    <div class="quantity-controls">
+      <button onclick="changeTempQuantity('Producto C', -1)">−</button>
+      <span id="temp-Producto C">0</span>
+      <button onclick="changeTempQuantity('Producto C', 1)">+</button>
+    </div>
+    <button onclick="addToCart('Producto C')">Agregar al carrito</button>
+    <p class="stock-info">Stock disponible: <span id="stock-Producto C">5</span></p>
+  </div>
+
+  </section>
+
+  <section class="banner">
+    <h2>🛒 Carrito</h2>
+    <div id="cart"></div>
+    <br>
+    </div>
+
+    <div class="cart-actions">
+  <button onclick="clearCart()">🗑️ Limpiar carrito</button>
+  <button onclick="sendToWhatsApp()">📦 Enviar pedido por WhatsApp</button>
+</div>
+
+
+  </section>
+
+  <footer id="contacto">
+    <p>© 2025 Mi Tienda Infantil – Todos los derechos reservados</p>
+  </footer>
+
+  <script>
+  let cart = {};
+  const tempQuantities = {};
+  const prices = {
+    "Babero Dino": 2500,
+    "Body Estrellas": 3800,
+    "Sonajero Arcoiris": 1900,
+    "Producto A": 2500,
+    "Producto B": 3800,
+    "Producto C": 1900
+  };
+
+  const stockLimits = {
+    "Babero Dino": 5,
+    "Body Estrellas": 3,
+    "Sonajero Arcoiris": 10,
+    "Producto A": 7,
+    "Producto B": 4,
+    "Producto C": 8
+  };
+
+  function renderCart() {
+    const container = document.getElementById('cart');
+    container.innerHTML = '';
+
+    let total = 0;
+    for (const item in cart) {
+      if (cart[item] > 0) {
+        const subtotal = cart[item] * prices[item];
+        container.innerHTML += `<p>• ${item} x${cart[item]} - $${subtotal}</p>`;
+        total += subtotal;
+      }
+    }
+
+    if (total > 0) {
+      container.innerHTML += `<p><strong>Total: $${total}</strong></p>`;
+    }
+
+    updateWhatsAppButton();
+  }
+
+  function updateWhatsAppButton() {
+    const whatsappBtn = document.querySelector(".cart-actions button:last-child");
+    const hasItems = Object.values(cart).some(qty => qty > 0);
+
+    whatsappBtn.disabled = !hasItems;
+    whatsappBtn.style.opacity = hasItems ? "1" : "0.6";
+    whatsappBtn.style.cursor = hasItems ? "pointer" : "not-allowed";
+  }
+
+  function changeTempQuantity(name, change) {
+    if (!tempQuantities[name]) tempQuantities[name] = 0;
+    const newQty = tempQuantities[name] + change;
+
+    if (newQty >= 0 && newQty <= (stockLimits[name] || 1000)) {
+      tempQuantities[name] = newQty;
+      const tempSpan = document.getElementById(`temp-${name}`);
+      if (tempSpan) tempSpan.textContent = newQty;
+    }
+  }
+
+  function addToCart(name) {
+    const toAdd = tempQuantities[name] || 0;
+    if (toAdd === 0) return;
+
+    if (!cart[name]) cart[name] = 0;
+    const newQty = cart[name] + toAdd;
+
+    if (newQty <= (stockLimits[name] || 1000)) {
+      cart[name] = newQty;
+      tempQuantities[name] = 0;
+      const tempSpan = document.getElementById(`temp-${name}`);
+      if (tempSpan) tempSpan.textContent = 0;
+      renderCart();
+    } else {
+      alert(`Solo hay ${stockLimits[name]} unidades disponibles de ${name}.`);
+    }
+  }
+
+  function clearCart() {
+    cart = {};
+    Object.keys(tempQuantities).forEach(name => {
+      tempQuantities[name] = 0;
+      const tempSpan = document.getElementById(`temp-${name}`);
+      if (tempSpan) tempSpan.textContent = 0;
+    });
+    renderCart();
+  }
+
+  function sendToWhatsApp() {
+    const hasItems = Object.values(cart).some(qty => qty > 0);
+    if (!hasItems) {
+      alert("El carrito está vacío. Agregá productos antes de enviar el pedido.");
+      return;
+    }
+
+    let message = "🛒 Pedido:\n";
+    for (const item in cart) {
+      if (cart[item] > 0) {
+        message += `• ${item} x${cart[item]}\n`;
+      }
+    }
+
+    const phone = "5493794278347";
+    const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+    window.open(url, '_blank');
+  }
+
+  function renderStockInfo() {
+    for (const name in stockLimits) {
+      const span = document.getElementById(`stock-${name}`);
+      if (span) span.textContent = stockLimits[name];
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    renderCart();
+    renderStockInfo();
+  });
+</script>
+
+
+</body>
+</html>
